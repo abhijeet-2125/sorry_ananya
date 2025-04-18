@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sorry Ananya</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to top right, #ffe6e6, #ffe6f7);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: 'Courier New', monospace;
+    }
+
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      text-align: center;
+      z-index: 2;
+      position: relative;
+    }
+
+    .message {
+      font-size: 1.2em;
+      white-space: pre-wrap;
+      border-right: 2px solid #f06292;
+      display: inline-block;
+      animation: typing 6s steps(60, end), blink-caret 0.75s step-end infinite;
+      overflow: hidden;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #f06292; }
+    }
+
+    button {
+      margin: 20px 10px 0 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background: #f06292;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 6s infinite ease-in;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: -10px;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    .popup {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      background-color: #fff0f5;
+      color: #d6336c;
+      border: 2px solid #f06292;
+      border-radius: 15px;
+      padding: 20px;
+      font-size: 1.1em;
+      box-shadow: 0 0 30px rgba(0,0,0,0.15);
+      opacity: 0;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      z-index: 3;
+    }
+
+    .popup.show {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="message" id="msg"></div>
+    <br />
+    <div style="margin-top: 20px; font-size: 1.1em; color: #f06292;">Please forgive me ma'am?</div>
+    <button onclick="showPopup()">Yes</button>
+    <button onclick="showPopup()">No</button>
+    <div class="popup" id="popup">Omg, thank you, Ananya! 💖 I promise I'll be sweeter than ever now... Can't wait for sweet dreams and to make things right 😉🌙</div>
+  </div>
+
+  <script>
+    const message = `Hey Ananya, 
+ I just wanted to say I'm truly sorry if what I said came off as rude or disrespectful. Am damn sure its disrespectful. That was never my intention.  
+I didn’t mean to doubt you or make you uncomfortable—it was just me being cautious. But I realize now I could’ve handled it way better.💖`;
+
+    const msgEl = document.getElementById('msg');
+    let index = 0;
+
+    function typeMessage() {
+      if (index < message.length) {
+        msgEl.innerHTML += message.charAt(index);
+        index++;
+        setTimeout(typeMessage, 40);
+      }
+    }
+
+    typeMessage();
+
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = '100vh';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 500);
+
+    function showPopup() {
+      const popup = document.getElementById('popup');
+      popup.classList.add('show');
+      setTimeout(() => {
+        popup.classList.remove('show');
+      }, 4000);
+    }
+  </script>
+</body>
+</html>
